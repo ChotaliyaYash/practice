@@ -1,16 +1,14 @@
 const express = require('express');
 
 const mongoose = require('mongoose');
-
-const path = require('path');
-
-const constants = require('./constants/constants');
+require('dotenv').config();
 
 const app = express();
 
 app.use(express.json());
 
 const port = process.env.PORT || 3000;
+const mongodb = process.env.MONGODBLINK;
 
 // Image upload data
 const multer = require('multer');
@@ -64,12 +62,12 @@ app.use((error, req, res, next) => {
     });
 })
 
-mongoose.connect(constants.MONGODBLINK)
+mongoose.connect(mongodb)
     .then((value) => {
         console.log('MongoDB is connnected');
 
-        app.listen(constants.PORT, () => {
-            console.log('Server is running on port', constants.PORT);
+        app.listen(port, () => {
+            console.log('Server is running on port', port);
         })
     })
     .catch((error) => {

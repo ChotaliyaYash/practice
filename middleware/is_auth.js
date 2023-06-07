@@ -1,4 +1,4 @@
-const constants = require('../constants/constants');
+const jwtString = process.env.JWTSTRING;
 
 const jwt = require('jsonwebtoken');
 
@@ -6,7 +6,7 @@ const isAuth = async (req, res, next) => {
     try {
         const token = req.header('token');
 
-        const verifiedData = jwt.verify(token, constants.JWTSTRING);
+        const verifiedData = jwt.verify(token, jwtString);
 
         if (!verifiedData) {
             const error = new Error("Token Expired");

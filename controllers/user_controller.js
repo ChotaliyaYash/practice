@@ -4,8 +4,8 @@ const jwt = require('jsonwebtoken');
 
 const bcrypt = require('bcryptjs');
 
-const constants = require('../constants/constants');
-
+const jwtString = process.env.JWTSTRING;
+const salt = process.env.SALT;
 // Image upload
 // 
 
@@ -24,7 +24,7 @@ const signUp = async (req, res, next) => {
             throw error;
         }
 
-        const hashedPassword = await bcrypt.hash(password, constants.SALT);
+        const hashedPassword = await bcrypt.hash(password, salt);
 
         const user = await UserModel({
             name,
@@ -72,7 +72,7 @@ const logIn = async (req, res, next) => {
                 userId: user._id,
                 email: user.email,
             },
-            constants.JWTSTRING,
+            jwtString,
             {
                 expiresIn: '1d'
             }
