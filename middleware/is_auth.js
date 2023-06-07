@@ -1,14 +1,10 @@
-const jwtString = process.env.JWTSTRING;
-
-require('dotenv').config();
-
 const jwt = require('jsonwebtoken');
 
 const isAuth = async (req, res, next) => {
     try {
         const token = req.header('token');
 
-        const verifiedData = jwt.verify(token, jwtString);
+        const verifiedData = jwt.verify(token, "OMGTest");
 
         if (!verifiedData) {
             const error = new Error("Token Expired");
