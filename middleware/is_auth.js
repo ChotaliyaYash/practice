@@ -1,5 +1,7 @@
 const jwtString = process.env.JWTSTRING;
 
+require('dotenv').config();
+
 const jwt = require('jsonwebtoken');
 
 const isAuth = async (req, res, next) => {
